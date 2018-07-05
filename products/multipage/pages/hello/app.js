@@ -7,7 +7,7 @@ class App extends React.Component {
     super(context);
     const serverSideData = this.props.serverSideData ?
       this.props.serverSideData[0].data :
-      ( _server_side_data_ ?
+      ( window._server_side_data_  ?
         _server_side_data_[0].data
         : {}
       );

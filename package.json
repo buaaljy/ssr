@@ -17,6 +17,7 @@
     "react-dom": "^15.6.1",
     "request": "^2.81.0",
     "universal-jsonp": "^0.4.11",
+    "vm2": "^3.6.1",
     "webpack": "^2.7.0"
   },
   "devDependencies": {
