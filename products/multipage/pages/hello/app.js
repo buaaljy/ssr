@@ -20,6 +20,10 @@ class App extends React.Component {
   }
   componentWillMount() {
     console.log('componentWillMount');
+    let i = 0;
+    // while (1) {
+    //   i++;
+    // }
   }
   componentDidMount() {
     request(testModule.getUser, {}).then((data) => {

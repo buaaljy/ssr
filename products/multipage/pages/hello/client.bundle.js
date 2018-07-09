@@ -9906,6 +9906,10 @@ var App = function (_React$Component) {
     key: 'componentWillMount',
     value: function componentWillMount() {
       console.log('componentWillMount');
+      var i = 0;
+      // while (1) {
+      //   i++;
+      // }
     }
   }, {
     key: 'componentDidMount',
