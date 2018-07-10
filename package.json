@@ -1,5 +1,5 @@
 {
-  "name": "react",
+  "name": "node-ssr",
   "version": "1.0.0",
   "description": "",
   "private": true,
@@ -9,7 +9,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-register": "^6.24.1",
     "co-request": "^1.0.0",
-    "egg": "^1.4.0",
+    "egg": "^2.0.0",
     "ignore-styles": "^5.0.1",
     "jsdom": "^11.2.0",
     "qs": "^6.5.0",
@@ -17,6 +17,7 @@
     "react-dom": "^15.6.1",
     "request": "^2.81.0",
     "universal-jsonp": "^0.4.11",
+    "uuid": "^3.3.2",
     "vm2": "^3.6.1",
     "webpack": "^2.7.0"
   },
@@ -32,7 +33,7 @@
     "webstorm-disable-index": "^1.2.0"
   },
   "engines": {
-    "node": ">=6.0.0"
+    "node": ">=8.0.0"
   },
   "scripts": {
     "start": "node index.js",

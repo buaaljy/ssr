@@ -2,7 +2,7 @@
 
 module.exports = app => {
   class TestController extends app.Controller {
-    * getUser() {
+    async getUser() {
       this.ctx.body = {
         data: {
           userId: '123',

@@ -6,7 +6,10 @@ module.exports = appInfo => {
   // should change to your own
   config.keys = appInfo.name + '_1501750189781_5913';
 
-  // add your config here
+  config.middleware = [ 'ssr' ];
+  config.ssr = {
+    match: '/products',
+  };
 
   return config;
 };
