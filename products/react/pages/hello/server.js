@@ -9,5 +9,7 @@ export const prefetch = function() {
 };
 
 export const render = function(serverSideData) {
-  return ReactDOMServer.renderToString(<App serverSideData={serverSideData} />);
+  return new Promise(resolve => {
+    resolve(ReactDOMServer.renderToString(<App serverSideData={serverSideData} />));
+  });
 }

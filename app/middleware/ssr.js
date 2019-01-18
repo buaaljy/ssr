@@ -7,7 +7,7 @@ const request = require('../../lib/request');
 module.exports = (options, app) => {
   return async function(ctx, next) {
     await next();
-
+    const t0 = +(new Date);
     const url = ctx.request.url.replace(/\?[\w\W]*$/g, '');
     const content = await fileCache.get(ctx, url);
     setHeaders(ctx, url);
@@ -17,7 +17,6 @@ module.exports = (options, app) => {
       return;
     }
     // resolve js|css
-    // @todo resolve image or other static file
     if (!url.match(/\.html$/)) {
       ctx.body = content;
       return;
@@ -28,23 +27,33 @@ module.exports = (options, app) => {
       return; 
     }
     // server-side-render
-    const sendToAgentMessage = {
-      uuid: uuidv1(),
-      originalUrl: ctx.originalUrl,
-      app,
-    };
-    app.messenger.sendToAgent('before_render', sendToAgentMessage);
+    // const sendToAgentMessage = {
+    //   uuid: uuidv1(),
+    //   originalUrl: ctx.originalUrl,
+    //   app,
+    // };
+    // app.messenger.sendToAgent('before_render', sendToAgentMessage);
+    
+    const t1 = +(new Date);
+    const vm2 = getVM(ctx);
     const serverBundleContent = await fileCache.get(ctx, url.replace(/index\.html$/, 'server.bundle.js'));
-    const vm = getVM(ctx);
-    const serverBundle = vm.run(serverBundleContent);
+    const serverBundle = vm2.run(serverBundleContent);
+    const t2 = +(new Date);
     // paralla fetch data
     const prefetchList = serverBundle.prefetch();
     const prefetchGenerators = prefetchList.map((item) => request(item));
     const prefetchData = await Promise.all(prefetchGenerators);
-    const reactString = serverBundle.render(prefetchData);
-    const replaceContent = content.replace('<div id="root"></div>', `${insertServerSideData(prefetchData)}<div id="root">${reactString}</div>`);
+    const t3 = +(new Date);
+    const renderString = await (new Promise(resolve => {
+      serverBundle.render(prefetchData).then((str) => {
+        resolve(str);
+      })
+    }));
+    const replaceContent = content.replace('<div id="root"></div>', `${insertServerSideData(prefetchData)}<div id="root">${renderString}</div>`);
     ctx.body = replaceContent;
-    app.messenger.sendToAgent('after_render', sendToAgentMessage);
+    const t4 = +(new Date);
+    console.log(t4 - t0, t2 - t1, t3 - t2, t4 - t3);
+    // app.messenger.sendToAgent('after_render', sendToAgentMessage);
   };
 };
 

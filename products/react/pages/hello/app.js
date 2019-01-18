@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 import request from '../../lib/request';
 import { testModule } from '../../service';
 
@@ -37,10 +38,12 @@ class App extends React.Component {
     console.log('componentDidMount');
   }
   render() {
+    console.log('render');
     return (
       <div onClick={() => {
         alert('test');  
       }}>
+        <h1>React</h1>
         <h1>hello {this.state.user.userName}</h1>
         <h2>{this.state.user.userId}</h2>
       </div>

@@ -3,12 +3,12 @@ var node_modules = path.resolve(__dirname, 'node_modules');
 var pathToReact = path.resolve(node_modules, 'react/dist/react.min.js');
 
 var config = [{
-  entry: path.resolve(__dirname, './products/multipage/pages/hello/server.js'),
+  entry: path.resolve(__dirname, './products/react/pages/hello/server.js'),
   resolve: {
   },
   target: 'node',
   output: {
-    path: path.resolve(__dirname, './products/multipage/pages/hello'),
+    path: path.resolve(__dirname, './products/react/pages/hello'),
     filename: 'server.bundle.js',
     libraryTarget: "umd",
   },
@@ -29,11 +29,11 @@ var config = [{
     }]
   }
 }, {
-  entry: path.resolve(__dirname, './products/multipage/pages/hello/index.js'),
+  entry: path.resolve(__dirname, './products/react/pages/hello/index.js'),
   resolve: {
   },
   output: {
-    path: path.resolve(__dirname, './products/multipage/pages/hello'),
+    path: path.resolve(__dirname, './products/react/pages/hello'),
     filename: 'client.bundle.js',
   },
   module: {
